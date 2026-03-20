@@ -173,6 +173,59 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Upload",
+      "item": [
+        {
+          "name": "Upload Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "description": "Upload an image file to Cloudinary and receive secure URL.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/upload/image",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "upload",
+                "image"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.imageUrl) {",
+                  "    pm.collectionVariables.set('uploadedImageUrl', jsonData.imageUrl);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
     }
   ],
   "event": [
@@ -199,6 +252,11 @@
     },
     {
       "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "uploadedImageUrl",
       "value": "",
       "type": "string"
     }
