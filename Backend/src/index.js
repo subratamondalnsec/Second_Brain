@@ -1,14 +1,24 @@
 require("dotenv").config();
 
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth.routes");
+const uploadRoutes = require("./routes/upload.routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./tmp/",
+    createParentPath: true,
+  })
+);
 app.use("/api/auth", authRoutes);
+app.use("/api/upload", uploadRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
