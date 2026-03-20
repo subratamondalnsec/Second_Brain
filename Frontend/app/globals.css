@@ -117,12 +117,35 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-    }
+    box-sizing: border-box;
+  }
   body {
-    @apply bg-background text-foreground;
-    }
-  html {
-    @apply font-sans;
-    }
+    @apply bg-gray-950 text-white;
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply w-full bg-gray-800 border border-gray-700 text-white rounded-lg 
+           px-4 py-3 focus:outline-none focus:border-indigo-500 
+           focus:ring-1 focus:ring-indigo-500 transition-colors 
+           placeholder-gray-500;
+  }
+  .btn-primary {
+    @apply w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 
+           disabled:cursor-not-allowed text-white font-medium py-3 px-4 
+           rounded-lg transition-colors duration-200;
+  }
+  .btn-secondary {
+    @apply w-full bg-transparent border border-gray-700 hover:border-gray-500 
+           text-gray-300 hover:text-white font-medium py-3 px-4 
+           rounded-lg transition-colors duration-200;
+  }
+  .card {
+    @apply bg-gray-900 border border-gray-800 rounded-xl p-6;
+  }
+  .error-box {
+    @apply bg-red-950 border border-red-800 text-red-300 
+           rounded-lg px-4 py-3 text-sm;
+  }
 }
