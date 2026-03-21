@@ -1,3 +1,4 @@
+const fs = require("fs");
 const cloudinary = require("../config/cloudinary");
 
 const uploadImage = async (req, res) => {
@@ -22,6 +23,9 @@ const uploadImage = async (req, res) => {
       folder: "second-brain-ai",
       resource_type: "image",
     });
+
+    // Auto-delete temp file after upload — no need to store on server
+    try { fs.unlinkSync(imageFile.tempFilePath); } catch (_) {}
 
     return res.status(200).json({
       success: true,

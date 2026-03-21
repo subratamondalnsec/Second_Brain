@@ -24,6 +24,11 @@ const userSchema = new mongoose.Schema(
 			type: Boolean,
 			default: true,
 		},
+		chatRecord: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "ChatRecord",
+			default: null,
+		},
 	},
 	{
 		timestamps: true,
